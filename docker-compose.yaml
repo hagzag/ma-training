@@ -1,0 +1,38 @@
+version: '3.3'
+
+
+services:
+
+    simple-service:
+        build: ./SimpleService
+        environment:
+            - PORT=3030
+            - HOST=simple-service
+            - SERVICE_DISCOVERY_PORT=8080
+            - SERVICE_DISCOVERY_HOST=service-discovery-main
+        ports:
+            - '3030:3030'
+        image: simple-service
+        container_name: simple-service
+        depends_on: 
+            - service-discovery
+
+    service-discovery:
+        build: ./ServiceDiscovery
+        environment:
+            - PORT=8080
+            - REDIS_HOST=service-discovery-redis
+        ports:
+            - '8080:8080'
+        image: service-discovery
+        container_name: service-discovery-main
+        depends_on: 
+            - redis
+
+    redis:
+        ports:
+            - '6379:6379'
+        container_name: service-discovery-redis
+        image: redis
+        volumes:
+            - ${PWD}/.ServiceDiscovery:/data
