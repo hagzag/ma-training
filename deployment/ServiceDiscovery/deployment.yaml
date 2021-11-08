@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: service-discovery
+  name: service-discovery
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-discovery
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: service-discovery
+    spec:
+      containers:
+      - image: hagzag/service-discovery
+        name: service-discovery
+        env:
+          - name: PORT
+            value: "8080"
+          - name: REDIS_HOST
+            value: service-discovery-redis
+        ports:
+        - containerPort: 8080
+        resources: {}
+status: {}

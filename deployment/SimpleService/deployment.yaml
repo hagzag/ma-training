@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: simple-service
+  name: simple-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: simple-service
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: simple-service
+    spec:
+      containers:
+      - image: hagzag/simple-service
+        name: simple-service
+        env:
+          - name: PORT
+            value: "3030"
+          - name: HOST
+            value: simple-service
+          - name: SERVICE_DISCOVERY_PORT
+            value: "8080"
+          - name: SERVICE_DISCOVERY_HOST
+            value: service-discovery-main
+        ports:
+        - containerPort: 3030
+        resources: {}
+status: {}
