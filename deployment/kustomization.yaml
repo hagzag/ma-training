@@ -1,0 +1,11 @@
+resources:
+- redis/deployment.yaml
+- redis/svc.yaml
+- ServiceDiscovery/deployment.yaml
+- ServiceDiscovery/svc.yaml
+- SimpleService/deployment.yaml
+- SimpleService/svc.yaml
+
+# images:
+#   - name: docker.io/hagzag/service-discovery
+#     newName: ssax/service-discovery
